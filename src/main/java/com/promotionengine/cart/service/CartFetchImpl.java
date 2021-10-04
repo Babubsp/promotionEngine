@@ -12,8 +12,7 @@ public class CartFetchImpl implements CartFetch {
 	}
 
 	public Carts listCart() throws Exception {
-		throw new Exception("Not Yet Implemented");
-		
+		return cartHolder.getCarts();
 	}
 
 }

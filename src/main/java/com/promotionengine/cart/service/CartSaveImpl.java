@@ -13,12 +13,12 @@ public class CartSaveImpl implements  CartSave{
 		}
 
 	public void addToCart(Cart cart) throws Exception {
-		throw new Exception("Not Yet Implemented");
+		cartHolder.getCarts().addCart(cart);
 		
 	}
 
 	public void setCart(Carts cart) throws Exception {
-		throw new Exception("Not Yet Implemented");		
+		cartHolder.setCarts(cart);		
 	}
 
 }

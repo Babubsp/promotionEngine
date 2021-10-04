@@ -57,7 +57,7 @@ class CartTest {
 		cartSaveImpl.addToCart(new Cart("A",2));
 		CartFetchImpl cartFetchImpl = new CartFetchImpl(cartHolder);
 		Carts actual = cartFetchImpl.listCart();
-		assertEquals(carts.getCarts().size()+1, actual.getCarts().size());
+		assertEquals(carts.getCarts().size(), actual.getCarts().size());
 	}
 
 }
