@@ -19,7 +19,7 @@ public class PromotionHolder {
 			if (promotionHolder != null) {
 				return promotionHolder;
 			} else {
-				synchronized (promotionHolder) {
+				synchronized (PromotionHolder.class) {
 					if (promotionHolder != null) {
 						return promotionHolder;
 					} else {

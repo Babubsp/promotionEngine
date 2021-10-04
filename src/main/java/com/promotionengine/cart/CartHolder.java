@@ -4,12 +4,12 @@ import org.apache.log4j.Logger;
 
 import com.promotionengine.cart.model.Carts;
 
-public class CartHolder {
+public class CartHolder{
 
 	static Logger log = Logger.getLogger(CartHolder.class.getName());
 	private static CartHolder cartHolder;
-	static Carts carts;
-
+	private Carts carts;
+	
 	private CartHolder() {
 
 	}
@@ -19,11 +19,12 @@ public class CartHolder {
 			if (cartHolder != null) {
 				return cartHolder;
 			} else {
-				synchronized (cartHolder) {
+				synchronized(CartHolder.class){
 					if (cartHolder != null) {
 						return cartHolder;
 					} else {
 						cartHolder = new CartHolder();
+						cartHolder.carts = new Carts();
 					}
 				}
 			}
@@ -34,4 +35,18 @@ public class CartHolder {
 		return cartHolder;
 	}
 
+	public void reInitialize() {
+		this.carts =new Carts(); 
+	}
+
+
+
+	public Carts getCarts() {
+		return this.carts;
+	}
+	
+	public void setCarts(Carts carts) {
+		this.carts = carts;
+	}
+	
 }

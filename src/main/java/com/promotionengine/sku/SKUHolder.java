@@ -20,7 +20,7 @@ public class SKUHolder {
 			if (skuHolder != null) {
 				return skuHolder;
 			} else {
-				synchronized (skuHolder) {
+				synchronized (SKUHolder.class) {
 					if (skuHolder != null) {
 						return skuHolder;
 					} else {
