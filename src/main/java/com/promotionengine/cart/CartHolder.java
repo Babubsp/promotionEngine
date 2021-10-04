@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.promotionengine.cart.model.Carts;
 import com.promotionengine.promotion.PromotionHolder;
+import com.promotionengine.sku.SKUHolder;
 
 public class CartHolder{
 
@@ -15,7 +16,7 @@ public class CartHolder{
 
 	}
 
-	public static CartHolder getInstance(PromotionHolder promotionHolder) {
+	public static CartHolder getInstance(PromotionHolder promotionHolder,SKUHolder skuHolder) {
 		try {
 			if (cartHolder != null) {
 				return cartHolder;
@@ -25,7 +26,7 @@ public class CartHolder{
 						return cartHolder;
 					} else {
 						cartHolder = new CartHolder();
-						cartHolder.carts = new Carts(promotionHolder);
+						cartHolder.carts = new Carts(promotionHolder,skuHolder);
 					}
 				}
 			}

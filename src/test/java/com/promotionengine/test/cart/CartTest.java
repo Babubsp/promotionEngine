@@ -32,7 +32,7 @@ class CartTest {
 
 	private Carts carts;
 	private PromotionHolder promotionHolder;
-	
+	private SKUHolder skuHolder;
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		
@@ -44,50 +44,7 @@ class CartTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		carts = new Carts(promotionHolder);
-		carts.addCart(new Cart("A",2));
-		carts.addCart(new Cart("B",2));
-		carts.addCart(new Cart("C",2));
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
-	@Test
-	void cartFetchTest() throws Exception {
-		CartHolder cartHolder = CartHolder.getInstance(promotionHolder);
-		cartHolder.setCarts(carts);
-		CartFetchImpl cartFetchImpl = new CartFetchImpl(cartHolder);
-		Carts actual = cartFetchImpl.listCart();
-		assertNotNull(actual);
-		assertEquals(carts.getCarts().size(), actual.getCarts().size());
-	}
-
-	
-	@Test
-	void cartFetchAndTestTest() throws Exception {
-		CartHolder cartHolder = CartHolder.getInstance(promotionHolder);
-		cartHolder.setCarts(carts);
-		CartSaveImpl cartSaveImpl = new CartSaveImpl(cartHolder);
-		cartSaveImpl.addToCart(new Cart("A",2));
-		CartFetchImpl cartFetchImpl = new CartFetchImpl(cartHolder);
-		Carts actual = cartFetchImpl.listCart();
-		assertEquals(carts.getCarts().size(), actual.getCarts().size());
-	}
-	
-	@Test
-	void cartPromotionTest() throws Exception {
-		CartHolder cartHolder = CartHolder.getInstance(promotionHolder);
-		SKUHolder skuHolder = SKUHolder.getInstance();
-		PromotionHolder promotionHolder = PromotionHolder.getInstance();
-		
-		SKUSave skuSave = new SKUSaveImpl(skuHolder);
-		skuSave.addSKU(new SKU("A", 50l));
-		skuSave.addSKU(new SKU("B", 30l));
-		skuSave.addSKU(new SKU("C", 20l));
-		skuSave.addSKU(new SKU("D", 15l));
-		
+		promotionHolder = PromotionHolder.getInstance();
 		PromotionSave promotionSave = new PromotionSaveImpl(promotionHolder);
 		promotionSave.addPromotion(new PromotionBuilder()
 				.addSKU("A", 3)
@@ -102,9 +59,55 @@ class CartTest {
 				.addSKU("D")
 				.totalAmountFixedValue(30l)
 				.build());
+		skuHolder = SKUHolder.getInstance();
+		SKUSave skuSave = new SKUSaveImpl(skuHolder);
+		skuSave.addSKU(new SKU("A", 50l));
+		skuSave.addSKU(new SKU("B", 30l));
+		skuSave.addSKU(new SKU("C", 20l));
+		skuSave.addSKU(new SKU("D", 15l));
+		carts = new Carts(promotionHolder,skuHolder);
+		carts.addCart(new Cart("A",1));
+		carts.addCart(new Cart("B",1));
+		carts.addCart(new Cart("C",1));
+		//carts.addCart(new Cart("D",1));
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+		promotionHolder.setPromotions(null);
+		skuHolder.setSkus(null);
+	}
+
+	@Test
+	void cartFetchTest() throws Exception {
+		CartHolder cartHolder = CartHolder.getInstance(promotionHolder,skuHolder);
+		cartHolder.setCarts(carts);
+		CartFetchImpl cartFetchImpl = new CartFetchImpl(cartHolder);
+		Carts actual = cartFetchImpl.listCart();
+		assertNotNull(actual);
+		assertEquals(carts.getCarts().size(), actual.getCarts().size());
+	}
+
+	
+	@Test
+	void cartFetchAndTestTest() throws Exception {
+		CartHolder cartHolder = CartHolder.getInstance(promotionHolder,skuHolder);
+		cartHolder.setCarts(carts);
+		CartSaveImpl cartSaveImpl = new CartSaveImpl(cartHolder);
+		cartSaveImpl.addToCart(new Cart("A",2));
+		CartFetchImpl cartFetchImpl = new CartFetchImpl(cartHolder);
+		Carts actual = cartFetchImpl.listCart();
+		assertEquals(carts.getCarts().size(), actual.getCarts().size());
+	}
+	
+	@Test
+	void cartPromotionTest() throws Exception {
+		CartHolder cartHolder = CartHolder.getInstance(promotionHolder,skuHolder);
 		
 		
-		Carts carts = new Carts(promotionHolder);
+		
+		
+		Carts carts = new Carts(promotionHolder,skuHolder);
 		carts.addCart(new Cart("A",1));
 		carts.addCart(new Cart("B",1));
 		carts.addCart(new Cart("C",1));
@@ -126,7 +129,7 @@ class CartTest {
 	
 	@Test
 	public void testApplyPromotion() throws Exception {
-		carts.applyPromotion();
+		System.out.println(carts.applyPromotion());
 	}
 	
 	
