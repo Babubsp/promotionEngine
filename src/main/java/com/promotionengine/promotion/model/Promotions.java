@@ -7,7 +7,15 @@ public class Promotions {
 
 	private List<Promotion> promotions;
 
+	@Override
+	public String toString() {
+		return "Promotions [promotions=" + promotions + "]";
+	}
+
 	public List<Promotion> getPromotions() {
+		if(promotions==null) {
+			promotions = new ArrayList<>();
+		}
 		return promotions;
 	}
 

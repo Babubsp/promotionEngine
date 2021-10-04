@@ -17,13 +17,11 @@ import com.promotionengine.cart.service.CartSaveImpl;
 
 class CartTest {
 
-	static Carts carts = new Carts();
+	private Carts carts = new Carts();
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		carts.addCart(new Cart("A",2));
-		carts.addCart(new Cart("B",2));
-		carts.addCart(new Cart("C",2));
+		
 	}
 
 	@AfterAll
@@ -32,6 +30,10 @@ class CartTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		carts = new Carts();
+		carts.addCart(new Cart("A",2));
+		carts.addCart(new Cart("B",2));
+		carts.addCart(new Cart("C",2));
 	}
 
 	@AfterEach

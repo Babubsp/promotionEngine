@@ -3,12 +3,15 @@ package com.promotionengine.promotion;
 import org.apache.log4j.Logger;
 
 import com.promotionengine.cart.model.Carts;
+import com.promotionengine.promotion.model.Promotions;
 
 public class PromotionHolder {
 
 	static Logger log = Logger.getLogger(PromotionHolder.class.getName());
+	
 	private static PromotionHolder promotionHolder;
-	static Carts carts;
+
+	Promotions promotions;
 
 	private PromotionHolder() {
 
@@ -32,6 +35,14 @@ public class PromotionHolder {
 		}
 
 		return promotionHolder;
+	}
+
+	public Promotions getPromotions() {
+		return promotions;
+	}
+
+	public void setPromotions(Promotions promotions) {
+		this.promotions = promotions;
 	}
 
 }
