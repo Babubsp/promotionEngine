@@ -38,6 +38,9 @@ public class PromotionHolder {
 	}
 
 	public Promotions getPromotions() {
+		if(promotions==null) {
+			promotions = new Promotions();
+		}
 		return promotions;
 	}
 

@@ -3,6 +3,10 @@ package com.promotionengine.sku.model;
 public class SKU {
 
 	private String skuId;
+	@Override
+	public String toString() {
+		return "SKU [skuId=" + skuId + ", skuAmount=" + skuAmount + "]";
+	}
 	private Long skuAmount;
 	
 	public SKU(String skuId,Long skuAmount) {

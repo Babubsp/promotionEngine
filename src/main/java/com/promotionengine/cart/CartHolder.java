@@ -3,6 +3,7 @@ package com.promotionengine.cart;
 import org.apache.log4j.Logger;
 
 import com.promotionengine.cart.model.Carts;
+import com.promotionengine.promotion.PromotionHolder;
 
 public class CartHolder{
 
@@ -14,7 +15,7 @@ public class CartHolder{
 
 	}
 
-	public static CartHolder getInstance() {
+	public static CartHolder getInstance(PromotionHolder promotionHolder) {
 		try {
 			if (cartHolder != null) {
 				return cartHolder;
@@ -24,7 +25,7 @@ public class CartHolder{
 						return cartHolder;
 					} else {
 						cartHolder = new CartHolder();
-						cartHolder.carts = new Carts();
+						cartHolder.carts = new Carts(promotionHolder);
 					}
 				}
 			}
@@ -34,12 +35,6 @@ public class CartHolder{
 
 		return cartHolder;
 	}
-
-	public void reInitialize() {
-		this.carts =new Carts(); 
-	}
-
-
 
 	public Carts getCarts() {
 		return this.carts;

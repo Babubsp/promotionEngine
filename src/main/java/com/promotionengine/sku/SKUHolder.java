@@ -1,5 +1,6 @@
 package com.promotionengine.sku;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,9 @@ public class SKUHolder {
 	}
 	
 	public void addSkus(SKU sku) {
+		if(this.skus==null) {
+			this.skus = new ArrayList<SKU>();
+		}
 		this.skus.add(sku);
 	}
 
